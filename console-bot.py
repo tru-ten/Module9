@@ -13,13 +13,13 @@ def error_handler(func):
             return 'Enter user name'
     return inner
 
-def hello_user(_):
+def hello_user(args):
     return "How can I help you?"
 
-def unknown_command(_):
+def unknown_command(args):
     return "unknown_command"
 
-def exit(_):
+def exit(args):
     return
 
 @error_handler
@@ -35,11 +35,13 @@ def change_phone(args):
     contact_book[name] = phone
     return f'{name} now has a phone: {phone}\nOld number: {old_phone}'
 
-def show_all(_):
-    result = ''
-    for name, phone in contact_book.items():
-        result += f'Name: {name} phone: {phone}\n'
-    return result
+def show_all(args):
+    if len(contact_book)>0:
+        result = ''
+        for name, phone in contact_book.items():
+            result += f'Name: {name} phone: {phone}\n'
+        return result
+    return 'Contact book is empty'
 
 @error_handler
 def show_phone(args):
